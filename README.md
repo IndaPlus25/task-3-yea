@@ -21,6 +21,8 @@ or
 - Submit code for tasks 2.92 -- 2.93 from 5th edition (or 2.83 -- 2.84 from 4th edition) of course 
 textbook in the form of **a complete Java source code file** called `Heater.java`.
 
+**Again,** do not forget to double check that your class and .java file have _matching names_!
+
 Please commit any written answers to the `docs` folder, and commit any Java code developed to the
 `code` folder of your KTH Github repo. Remember to push to KTH Github.
 
