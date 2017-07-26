@@ -115,7 +115,7 @@ explanatory piece of text.
 
 ### Option 2: Heater
 
-#### Exercise 2.92 - Challenge exercise
+#### Exercise 2.92
 Create a new project, heater-exercise, within BlueJ. Edit the details in the project description —
 the text note you see in the diagram. Create a class, `Heater`, that contains a single field,
 `temperature` whose type is double-precision floating point — see Appendix B, section B.1, for the
@@ -126,7 +126,7 @@ Define a constructor that takes no parameters. The `temperature` field should be
 decrease the value of temperature by 5.0° respectively. Define an accessor method to return the
 value of temperature.
 
-#### Exercise 2.93 - Challenge exercise
+#### Exercise 2.93
 Modify your `Heater` class to define three new double-precision floating point fields: `min`, `max`,
 and `increment`. The values of `min` and `max` should be set by parameters passed to the
 constructor. The value of increment should be set to 5.0 in the constructor. Modify the definitions
