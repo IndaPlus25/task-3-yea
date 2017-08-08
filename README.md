@@ -25,8 +25,8 @@ or
 > **Assistant's note:** Again, do not forget to double check that the names
 > of your class and `.java` file match!
 
-Please commit any written answers to the `docs` folder, and commit any Java code
-developed to the `src` folder of your KTH Github repo. Remember to push to KTH
+Please commit any written answers to the [`docs`](docs) folder, and commit any Java code
+developed to the [`src`](src) folder of your KTH Github repo. Remember to push to KTH
 Github.
 
 ### Option 1: Book
