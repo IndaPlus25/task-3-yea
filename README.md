@@ -26,7 +26,7 @@ or
 > of your class and `.java` file match!
 
 Please commit any written answers to the `docs` folder, and commit any Java code
-developed to the `code` folder of your KTH Github repo. Remember to push to KTH
+developed to the `src` folder of your KTH Github repo. Remember to push to KTH
 Github.
 
 ### Option 1: Book
