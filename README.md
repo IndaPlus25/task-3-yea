@@ -14,13 +14,13 @@ you must be prepared to discuss it.
 ### Github Task:
 Choose **one** of the following tasks:
 
-- Submit code for tasks 2.83 -- 2.90 from 5th edition of course textbook in the
-  form of **a complete Java source code file** called `Book.java`.
+- Submit code for tasks 2.83 -- 2.90 in the form of **a complete Java source
+  code file** called `Book.java`.
 
 or
 
-- Submit code for tasks 2.92 -- 2.93 from 5th edition of course textbook in the
-  form of **a complete Java source code file** called `Heater.java`.
+- Submit code for tasks 2.92 -- 2.93 the form of **a complete Java source code
+  file** called `Heater.java`.
 
 > **Assistant's note:** Again, do not forget to double check that the names
 > of your class and `.java` file match!
