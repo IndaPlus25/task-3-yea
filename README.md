@@ -6,26 +6,24 @@ For instructions on how to do and submit the assignment, please see the
 [assignments section of the course instructions](https://gits-15.sys.kth.se/inda-17/course-instructions#assignments).
 
 ### Homework
-Study sections 2.13 -- 2.23 of the course textbook. Please complete exercises
-2.46 -- 2.82 from 5th edition (or 2.43 -- 2.74 from 4th edition) of the course
-textbook. You do not need to submit this homework, but you must be prepared to
-discuss it.
+Study sections 2.13, 2.14 and 2.19 -- 2.23 of the course textbook. Please
+complete exercises 2.52 -- 2.57 and 2.62 -- 2.63 (from last week's reading
+material) and also 2.64 -- 2.82. You do not need to submit this homework, but
+you must be prepared to discuss it.
 
 ### Github Task:
 Choose **one** of the following tasks:
 
-- Submit code for tasks 2.83 -- 2.90 from 5th edition (or 2.75 -- 2.82 from 4th
-  edition) of course textbook in the form of **a complete Java source code
-  file** called `Book.java`.
+- Submit code for tasks 2.83 -- 2.90 from 5th edition of course textbook in the
+  form of **a complete Java source code file** called `Book.java`.
 
 or
 
-- Submit code for tasks 2.92 -- 2.93 from 5th edition (or 2.83 -- 2.84 from 4th
-  edition) of course textbook in the form of **a complete Java source code
-  file** called `Heater.java`.
+- Submit code for tasks 2.92 -- 2.93 from 5th edition of course textbook in the
+  form of **a complete Java source code file** called `Heater.java`.
 
-**Again,** do not forget to double check that your class and .java file have
-_matching names_!
+> **Assistant's note:** Again, do not forget to double check that the names
+> of your class and `.java` file match!
 
 Please commit any written answers to the `docs` folder, and commit any Java code
 developed to the `code` folder of your KTH Github repo. Remember to push to KTH
