@@ -6,10 +6,12 @@ For instructions on how to do and submit the assignment, please see the
 [assignments section of the course instructions](https://gits-15.sys.kth.se/inda-17/course-instructions#assignments).
 
 ### Homework
-Study sections 2.13, 2.14 and 2.19 -- 2.23 of the course textbook. Please
-complete exercises 2.52 -- 2.57 and 2.62 -- 2.63 (from last week's reading
-material) and also 2.64 -- 2.82. You do not need to submit this homework, but
-you must be prepared to discuss it.
+Study sections 2.13, 2.14 and 2.19 -- 2.23 of the course textbook (5th or 6th
+ed).
+
+Please complete exercises 2.52 -- 2.57 and 2.62 -- 2.63 (from last week's
+reading material) and also 2.64 -- 2.82. You do not need to submit this
+homework, but you must be prepared to discuss it.
 
 ### Github Task:
 Choose **one** of the following tasks:
