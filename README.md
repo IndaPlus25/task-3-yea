@@ -1,9 +1,9 @@
 ### Deadline
-This work should be completed before the exercise on **Friday 22nd September**.
+This work should be completed before the exercise on **Friday 21st September**.
 
 ### Instructions
 For instructions on how to do and submit the assignment, please see the
-[assignments section of the course instructions](https://gits-15.sys.kth.se/inda-17/course-instructions#assignments).
+[assignments section of the course instructions](https://gits-15.sys.kth.se/inda-18/course-instructions#assignments).
 
 ### Homework
 Study sections 2.13, 2.14 and 2.19 -- 2.23 of the course textbook (5th or 6th
@@ -158,3 +158,6 @@ test that the class works as you would expect it to by creating some Heater
 objects within BlueJ. Do things still work as expected if a negative value is
 passed to the `setIncrement` method?  Add a check to this method to prevent a
 negative value from being assigned to `increment`.
+
+### Grading Criteria
+Each week we will communicate grading criteria through the [issue tracker](../../issues/). Grading criteria set the basic standards for a pass, komp or fail, so it is essential you review them each week. These will change over time as your skills develop, so make sure you read the grading criteria issue carefully and tick off all the requirements.
