@@ -1,9 +1,9 @@
 ### Deadline
-This work should be completed before the exercise on **Friday 21st September**.
+This work should be completed before the exercise on **Friday 20th September**.
 
 ### Instructions
 For instructions on how to do and submit the assignment, please see the
-[assignments section of the course instructions](https://gits-15.sys.kth.se/inda-18/course-instructions#assignments).
+[assignments section of the course instructions](https://gits-15.sys.kth.se/inda-19/course-instructions#assignments).
 
 ### Homework
 Study sections 2.13, 2.14 and 2.19 -- 2.23 of the course textbook (5th or 6th
