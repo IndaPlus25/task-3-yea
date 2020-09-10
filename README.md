@@ -6,9 +6,9 @@ For instructions on how to do and submit the assignment, please see the
 [assignments section of the course instructions](https://gits-15.sys.kth.se/inda-20/course-instructions#assignments).
 
 ### Preparation
-You must read and answer the questions in the OLI material for Module 2.
+You must read and answer the questions in the OLI material:
 
-- Read [Module 2: Branching](https://kth.oli.cmu.edu/jcourse/webui/syllabus/module.do?context=3f7e377aac1f08887b5150a577616ebd)
+- Read [Module 3: Branching](https://kth.oli.cmu.edu/jcourse/webui/syllabus/module.do?context=3f7e377aac1f08887b5150a577616ebd)
 - If you have not done so, goto https://kth.oli.cmu.edu/, signup and register for the course key `dd1337-ht20`
 
 You may wish to also read from, _Objects First with Java_.
