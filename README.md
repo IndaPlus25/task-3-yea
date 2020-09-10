@@ -1,17 +1,20 @@
 ### Deadline
-This work should be completed before the exercise on **Friday 20th September**.
+This work should be completed before the exercise on **Friday 18th September**.
 
 ### Instructions
 For instructions on how to do and submit the assignment, please see the
-[assignments section of the course instructions](https://gits-15.sys.kth.se/inda-19/course-instructions#assignments).
+[assignments section of the course instructions](https://gits-15.sys.kth.se/inda-20/course-instructions#assignments).
 
-### Homework
-Study sections 2.13, 2.14 and 2.19 -- 2.23 of the course textbook (5th or 6th
+### Preparation
+You must read and answer the questions in the OLI material for Module 2.
+
+- Read [Module 2: Branching](https://kth.oli.cmu.edu/jcourse/webui/syllabus/module.do?context=3f7e377aac1f08887b5150a577616ebd)
+- If you have not done so, goto https://kth.oli.cmu.edu/, signup and register for the course key `dd1337-ht20`
+
+You may wish to also read from, _Objects First with Java_.
+
+Relevant sections are 2.13, 2.14 and 2.19 -- 2.23 of the course textbook (5th or 6th
 ed).
-
-Please complete exercises 2.52 -- 2.57 and 2.62 -- 2.63 (from last week's
-reading material) and also 2.64 -- 2.82. You do not need to submit this
-homework, but you must be prepared to discuss it.
 
 ### Github Task:
 Choose **one** of the following tasks:
