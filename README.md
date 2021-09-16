@@ -132,11 +132,9 @@ explanatory piece of text.
 ### Option 2: Heater
 
 #### Exercise 2.92
-Create a new project, heater-exercise, within BlueJ. Edit the details in the
-project description — the text note you see in the diagram. Create a class,
+Create a new project, heater-exercise, within BlueJ. Create a class,
 `Heater`, that contains a single field, `temperature` whose type is
-double-precision floating point — see Appendix B, section B.1, for the Java type
-name that corresponds to this description.
+double-precision floating point — see [this tutorial](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/datatypes.html) for tips on using the `float` type in Java.
 
 Define a constructor that takes no parameters. The `temperature` field should be
 set to the value 15.0 in the constructor. Define the mutators `warmer` and
