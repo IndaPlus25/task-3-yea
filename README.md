@@ -36,11 +36,11 @@ Github.
 
 ### Option 1: Book
 
-#### Exercise 2.83
+#### Exercise 2.83 (src)
 Below is the outline for a Book class, which can be found in the book-exercise
 project. The outline already defines two fields and a constructor to initialize
 the fields. In this and the next few exercises, you will add features to the
-class outline.
+class outline. Create the file `Book.java` in the `src` folder of this repo.
 
 Add two accessor methods to the class - `getAuthor` and `getTitle` - that return
 the `author` and `title` fields as their respective results. Test your class by
@@ -73,18 +73,18 @@ creating some instances and calling the methods.
   }
 ```
 
-#### Exercise 2.84
+#### Exercise 2.84 (src - use `Book.java`)
 Add two methods, `printAuthor` and `printTitle`, to the outline Book class.
 These should print the `author` and `title` fields, respectively, to the
 terminal window.
 
-#### Exercise 2.85
+#### Exercise 2.85 (src - use `Book.java`)
 Add a field, `pages`, to the Book class to store the number of pages. This
 should be of type `int`, and its initial value should be passed to the single
 constructor, along with the author and title strings. Include an appropriate
 `getPages` accessor method for this field.
 
-#### Exercise 2.86
+#### Exercise 2.86 (src - use `Book.java`)
 Add a method, `printDetails`, to the Book class. This should print details of
 the author, title, and pages to the terminal window. It is your choice how the
 details are formatted. For instance, all three items could be printed on a
@@ -94,7 +94,7 @@ which is the title, for example:
 
 _Title: Robinson Crusoe, Author: Daniel Defoe, Pages: 232_
 
-#### Exercise 2.87
+#### Exercise 2.87 (src - use `Book.java`)
 Add a further field, `refNumber`, to the Book class. This field can store a
 reference number for a library, for example. It should be of type `String` and
 initialized to the zero length string ("") in the constructor, as its initial
@@ -109,19 +109,19 @@ The body of this method should assign the value of the parameter to the
 `refNumber` field. Add a corresponding `getRefNumber` accessor to help you check
 that the mutator works correctly.
 
-#### Exercise 2.88
+#### Exercise 2.88 (src - use `Book.java`)
 Modify your `printDetails` method to include printing the reference number.
 However, the method should print the reference number only if it has been set —
 that is, the `refNumber` string has a non-zero length. If it has not been set,
 then print the string "ZZZ" instead. Hint: Use a conditional statement whose
 test calls the length method on the `refNumber` string.
 
-#### Exercise 2.89
+#### Exercise 2.89 (src - use `Book.java`)
 Modify your `setRefNumber` mutator so that it sets the `refNumber` field only if
 the parameter is a string of at least three characters. If it is less than
 three, then print an error message and leave the field unchanged.
 
-#### Exercise 2.90
+#### Exercise 2.90 (src - use `Book.java`)
 Add a further integer field, `borrowed`, to the Book class. This keeps a count
 of the number of times a book has been borrowed. Add a mutator, `borrow`, to the
 class. This should update the field by 1 each time it is called. Include an
@@ -131,17 +131,20 @@ explanatory piece of text.
 
 ### Option 2: Heater
 
-#### Exercise 2.92
-Create a new project, heater-exercise, within BlueJ. Create a class,
-`Heater`, that contains a single field, `temperature` whose type is
-double-precision floating point — see [this tutorial](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/datatypes.html) for tips on using the `float` type in Java.
+#### Exercise 2.92 (src)
+
+Create a class `Heater.java` in the `src` folder of this repo. `Heater` should
+contain a single field, `temperature` whose type is double-precision floating
+point — see [this
+tutorial](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/datatypes.html)
+for tips on using the `float` type in Java.
 
 Define a constructor that takes no parameters. The `temperature` field should be
 set to the value 15.0 in the constructor. Define the mutators `warmer` and
 `cooler`, whose effect is to increase or decrease the value of temperature by
 5.0° respectively. Define an accessor method to return the value of temperature.
 
-#### Exercise 2.93
+#### Exercise 2.93 (src - use `Heater.java`)
 Modify your `Heater` class to define three new double-precision floating point
 fields: `min`, `max`, and `increment`. The values of `min` and `max` should be
 set by parameters passed to the constructor. The value of increment should be
@@ -161,4 +164,9 @@ passed to the `setIncrement` method?  Add a check to this method to prevent a
 negative value from being assigned to `increment`.
 
 ### Grading Criteria
-Each week we will communicate grading criteria through the [issue tracker](../../issues/). Grading criteria set the basic standards for a pass, komp or fail, so it is essential you review them each week. These will change over time as your skills develop, so make sure you read the grading criteria issue carefully and tick off all the requirements.
+
+Each week we will communicate grading criteria through the [issue
+tracker](../../issues/). Grading criteria set the basic standards for a pass,
+komp or fail, so it is essential you review them each week. These will change
+over time as your skills develop, so make sure you read the grading criteria
+issue carefully and tick off all the requirements.
