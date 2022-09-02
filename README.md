@@ -1,172 +1,139 @@
-### Deadline
-This work should be completed before the exercise on **Friday 24th September**.
+# Is this a Triangle?
 
-### Instructions
+The following assignment is about geometry -- rectangles and triangles are objects that can be modeled with Java! You are going to practice on `if` and `else`-statements and be introduced to the *triangle inequality*.
+
+
+
+<img src="images/is_this_a_triangle" alt="very funny boomer meme" width="500"/>
+
+### 💀 Deadline
+This work should be completed before the exercise, on **Weekday 10th Month** depending on your group.
+
+### 👨🏽‍🏫 Instructions
 For instructions on how to do and submit the assignment, please see the
 [assignments section of the course instructions](https://gits-15.sys.kth.se/inda-21/course-instructions#assignments).
 
-### Preparation
-You must read and answer the questions in the OLI material:
+### 📝 Preparation
 
-- Read [Module 3: Branching](https://kth.oli.cmu.edu/jcourse/webui/syllabus/module.do?context=881a25c0ac1f08887de8b1d395a3c2fe)
-- If you have not done so, goto https://kth.oli.cmu.edu/, signup and register for the course key `dd1337-ht21`
+You must read and answer the questions in the OLI material for Module 2.
 
-You may wish to also read from, _Objects First with Java_.
+- Read [Module y: title of module]([link to OLI](https://www.youtube.com/watch?v=dQw4w9WgXcQ))
+- If you have not done so, goto https://kth.oli.cmu.edu/, signup and register for the course key `dd1337-ht22`
 
-Relevant sections are 2.13, 2.14 and 2.19 -- 2.23 of the course textbook (5th or 6th
-ed).
+### ✅ Learning Goals
+This weeks learning goals include:
 
-### Github Task:
-Choose **one** of the following tasks:
+1. Branching (`if` and `else` statements)
+2. Access object fields and methods with dot-notation
+3. Using the Java Math Library
 
-- Submit code for tasks 2.83 -- 2.90 in the form of **a complete Java source
-  code file** called `Book.java`.
+### 🚨 Troubleshooting Guide
+If you have any questions or problems, follow this procedure: <br/>
 
-or
+1. Look at this week's [posted issues](https://gits-15.sys.kth.se/inda-22/help/issues). Are other students asking about your problem?
+2. If not, post a question yourself by creating a [New Issue](https://gits-15.sys.kth.se/inda-22/help/issues/new). Add a descriptive title, beginning with "Task *x*: *summary of problem here*"
+3. Ask a TA in person during the [weekly lab](https://queue.csc.kth.se/Queue/INDA). Check your schedule to see when next lab is.
 
-- Submit code for tasks 2.92 -- 2.93 the form of **a complete Java source code
-  file** called `Heater.java`.
+We encourage you to discuss with your course friends, but **do not share answers**!
 
-> **Assistant's note:** Again, do not forget to double check that the names
-> of your class and `.java` file match!
+### 🏛 Assignment
 
-Please commit any written answers to the [`docs`](docs) folder, and commit any Java code
-developed to the [`src`](src) folder of your KTH Github repo. Remember to push to KTH
-Github.
+#### Exercise 3.0 -- A Triangle Object
+Create a new class called `Triangle.java` in the [src](src/) directory. The triangle class should have three fields of type `int` -- the sides `a`, `b` and `c`. Add a constructor that takes one parameter per side of the triangle, setting each sides' value to the corresponding parameter. The main method of the example below should compile if implemented correctly.
 
-### Option 1: Book
+<details>
+  <summary> 🛠 Main method example </summary>
 
-#### Exercise 2.83 (src)
-Below is the outline for a Book class, which can be found in the book-exercise
-project. The outline already defines two fields and a constructor to initialize
-the fields. In this and the next few exercises, you will add features to the
-class outline. Create the file `Book.java` in the `src` folder of this repo.
+```Java
+public static void main(String[] args){
+  // create a new Triangle object with the sides 3, 1 and 1
+  Triangle triangle = new Triangle(3, 1, 1);
+}
+```
+</details>
 
-Add two accessor methods to the class - `getAuthor` and `getTitle` - that return
-the `author` and `title` fields as their respective results. Test your class by
-creating some instances and calling the methods.
+#### Exercise 3.1 -- The Triangle Inequality
+*The Triangle Inequality* is a popular theorem in mathematics. In simplified terms, it lets you know if three sides, *a*, *b*, and, *c*, can make a triangle. For example, if I give you *a = 3*, *b = 1* and *c = 1*, you can **not** make a triangle. An example of valid input is *a = 1*, *b = 1* and *c = 1*.
 
-```java
-  /**
-   * A class that maintains information on a book.
-   * This might form part of a larger application such
-   * as a library system, for instance.
-   *
-   * @author (Insert your name here.)
-   * @version (Insert today’s date here.)
-   */
-  public class Book
-  {
-      // The fields.
-      private String author;
-      private String title;
-      /**
-       * Set the author and title fields when this object
-       * is constructed.
-       */
-      public Book(String bookAuthor, String bookTitle)
-      {
-          author = bookAuthor;
-          title = bookTitle;
-      }
-      // Add the methods here...
+Create a method in the `Triangle` class with the following header `private boolean validTriangle(int a, int b, int c)`, that returns `true` if the parameters can construct the sides of a traingle, and `false` in all other cases.
+
+A straightforward approach is checking if the three following relations are true. If they are, then the sides *A*, *B* and *C*, can make a triangle:
+
+<img src="images/triangle-inequality.png" alt="drawing" width="400"/>
+
+You should put the check at the top of your constructor and try the previous example again:
+
+```Java
+public Triangle(int a, int b, int c) {
+  if(validTriangle(a, b, c)) {
+    // Okay to create the Triangle object!
+  } else {
+    // End the program with an error message
+    throw new IllegalArgumentException("This is not a valid triangle!");
   }
+}
 ```
 
-#### Exercise 2.84 (src - use `Book.java`)
-Add two methods, `printAuthor` and `printTitle`, to the outline Book class.
-These should print the `author` and `title` fields, respectively, to the
-terminal window.
+> **Assistant's Note:** There are various ways to achieve this. Under the [Wikipedia page for the Triangle Inequality](https://en.wikipedia.org/wiki/Triangle_inequality#Mathematical_expression_of_the_constraint_on_the_sides_of_a_triangle) there are some useful expressions you can use. Although it is not necessary, you may also use the [Java Math Library](https://docs.oracle.com/javase/tutorial/java/data/beyondmath.html).
 
-#### Exercise 2.85 (src - use `Book.java`)
-Add a field, `pages`, to the Book class to store the number of pages. This
-should be of type `int`, and its initial value should be passed to the single
-constructor, along with the author and title strings. Include an appropriate
-`getPages` accessor method for this field.
+#### Exercise 3.2 -- The three types of Triangles
 
-#### Exercise 2.86 (src - use `Book.java`)
-Add a method, `printDetails`, to the Book class. This should print details of
-the author, title, and pages to the terminal window. It is your choice how the
-details are formatted. For instance, all three items could be printed on a
-single line, or each could be printed on a separate line.  You might also choose
-to include some explanatory text to help a user work out which is the author and
-which is the title, for example:
+From the [Wikipedia page on Triangles](https://en.wikipedia.org/wiki/Triangle) you can read about the three types of triangles. Make a method in the `Triangle` class called `String getTriangleType()` that returns a `String` of what type the triangle is (*"Equilateral"*, *"Isosceles"* or *"Scalene"*).
 
-_Title: Robinson Crusoe, Author: Daniel Defoe, Pages: 232_
+Equilateral Triangle             |  Isosceles Triangle | Scalene Triangle
+:-------------------------:|:-------------------------:|:-------------------------:
+![](https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Triangle.Equilateral.svg/240px-Triangle.Equilateral.svg.png)  |  ![](https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Triangle.Isosceles.svg/156px-Triangle.Isosceles.svg.png) | ![](https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Triangle.Scalene.svg/240px-Triangle.Scalene.svg.png)
 
-#### Exercise 2.87 (src - use `Book.java`)
-Add a further field, `refNumber`, to the Book class. This field can store a
-reference number for a library, for example. It should be of type `String` and
-initialized to the zero length string ("") in the constructor, as its initial
-value is not passed in a parameter to the constructor. Instead, define a mutator
-for it with the following header:
+> **From Wikipedia:** Hatch marks, also called tick marks, are used in diagrams of triangles and other geometric figures to identify sides of equal lengths. A side can be marked with a pattern of "ticks", short line segments in the form of tally marks; two sides have equal lengths if they are both marked with the same pattern.
 
-```java
-public void setRefNumber(String ref)
+#### Exercise 3.3 -- `Triangle.getArea()`
+In this exercise, you have to calculate the area of a triangle. Mathematican's have come up with *many* formulas to achive this, but since our triangle object have the side lenghts as fields, we recommend using [Heron's Formula](https://en.wikipedia.org/wiki/Heron%27s_formula). The formula states that the area of a triangle whose sides have lengths *a*, *b* and *c* is
+
+<img src="images/herons-formula.png" alt="Heron's formula" width="400"/>
+
+where *s* is the *semi-perimeter* of the triangle:
+
+<img src="images/semi-perimeter.png" alt="Semi-perimeter" width="200"/>
+
+The method has to be called `getArea()` and return a `double`. Test your implementation before you push your solution to GitHub!
+
+<details>
+<summary> 📚 How-to: square root (Java Math Library) </summary>
+<! -- requires a blank space -->
+
+In order to find the square root of an experssion, you have to use the [Java Math library](https://docs.oracle.com/javase/8/docs/api/java/lang/Math.html). To take the square root of any number, you make the following call:
+
+```Java
+Math.sqrt(argument); // "argument" can be either a number, or an expression that evaluates to a number
 ```
 
-The body of this method should assign the value of the parameter to the
-`refNumber` field. Add a corresponding `getRefNumber` accessor to help you check
-that the mutator works correctly.
+</details>
 
-#### Exercise 2.88 (src - use `Book.java`)
-Modify your `printDetails` method to include printing the reference number.
-However, the method should print the reference number only if it has been set —
-that is, the `refNumber` string has a non-zero length. If it has not been set,
-then print the string "ZZZ" instead. Hint: Use a conditional statement whose
-test calls the length method on the `refNumber` string.
+> **Assistant's Note:** To use Heron's Formula you need the *semi-perimeter* *s*. We suggest you add a so-called *helper method*, called `getPerimiter()`, to your Triangle class.
 
-#### Exercise 2.89 (src - use `Book.java`)
-Modify your `setRefNumber` mutator so that it sets the `refNumber` field only if
-the parameter is a string of at least three characters. If it is less than
-three, then print an error message and leave the field unchanged.
+##### 💭 Food for thought
+An example of why one would use getters and setters to ensure encapsulation:
 
-#### Exercise 2.90 (src - use `Book.java`)
-Add a further integer field, `borrowed`, to the Book class. This keeps a count
-of the number of times a book has been borrowed. Add a mutator, `borrow`, to the
-class. This should update the field by 1 each time it is called. Include an
-accessor, `getBorrowed`, that returns the value of this new field as its result.
-Modify `printDetails` so that it includes the value of this field with an
-explanatory piece of text.
+1. Create a triangle with the sides *a = 1*, *b = 1*, and, *c = 1*.
+2. Change *a* from 1 to 3.
+3. Do you still have a valid triangle?
+4. How would you fix this?
 
-### Option 2: Heater
+You don't have to provide any answers, but it will be helpful to think about.
 
-#### Exercise 2.92 (src)
+#### Exercise 3.4 -- Reverse Engineering
+Now that you have created a `Triangle` class, let's also create a `Rectangle` class along with some useful methods.
+For this exercise, you will not be given detailed instructions. Instead, you will need to read trough the code in the [`src/RectangleExample`](src/RectangleExample) file. This code will attempt to create a `Rectangle` object and call three different methods on it. At the moment, it will not compile and run, since there is no `Rectangle.java` file, so start by creating this file in your [src](src) folder.
 
-Create a class `Heater.java` in the `src` folder of this repo. `Heater` should
-contain a single field, `temperature` whose type is double-precision floating
-point — see [this
-tutorial](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/datatypes.html)
-for tips on using the `float` type in Java.
+You will now need to create the fields, getters, setters and required methods in your `Rectangle` class that will allow `RectangleExample` to run and produce the correct results. Your code does not need to cover every edge case, but make sure to run the `RectangleExample` and check so that your methods return the expected values. If you get stuck, don't hesitate to get help through any of the channels listed in the Troubleshooting section.
 
-Define a constructor that takes no parameters. The `temperature` field should be
-set to the value 15.0 in the constructor. Define the mutators `warmer` and
-`cooler`, whose effect is to increase or decrease the value of temperature by
-5.0° respectively. Define an accessor method to return the value of temperature.
 
-#### Exercise 2.93 (src - use `Heater.java`)
-Modify your `Heater` class to define three new double-precision floating point
-fields: `min`, `max`, and `increment`. The values of `min` and `max` should be
-set by parameters passed to the constructor. The value of increment should be
-set to 5.0 in the constructor. Modify the definitions of `warmer` and `cooler`
-so that they use the value of `increment` rather than an explicit value of 5.0.
-Before proceeding further with this exercise, check that everything works as
-before.
+### 🐞 Bugs and errors?
+If you find any inconsistencies or errors in this exercise, please open a [New Issue](https://gits-15.sys.kth.se/inda-22/help/issues/new) with the title "Task *x* Error: *summary of error here*". Found bugs will be rewarded by mentions in the acknowledgment section.
 
-Now modify the `warmer` method so that it will not allow the temperature to be
-set to a value greater than `max`. Similarly modify `cooler` so that it will not
-allow temperature to be set to a value less than `min`. Check that the class
-works properly. Now add a method, `setIncrement`, that takes a single parameter
-of the appropriate type and uses it to set the value of `increment`. Once again,
-test that the class works as you would expect it to by creating some Heater
-objects within BlueJ. Do things still work as expected if a negative value is
-passed to the `setIncrement` method?  Add a check to this method to prevent a
-negative value from being assigned to `increment`.
-
-### Grading Criteria
-
-Each week we will communicate grading criteria through the [issue
-tracker](../../issues/). Grading criteria set the basic standards for a pass,
-komp or fail, so it is essential you review them each week. These will change
-over time as your skills develop, so make sure you read the grading criteria
-issue carefully and tick off all the requirements.
+### 🙏 Acknowledgment
+This task was designed by                <br>
+[Linus Östlund](mailto:linusost@kth.se)  <br>
+[Sofia Bobadilla](mailto:sofbob@kth.se)  <br>
+[Gabriel Skoglund](mailto:gabsko@kth.se) <br>
+[Arvid Siberov](mailto:asiberov@kth.se)  <br>
