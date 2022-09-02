@@ -4,7 +4,7 @@ The following assignment is about geometry -- rectangles and triangles are objec
 
 
 
-<img src="images/is_this_a_triangle" alt="very funny boomer meme" width="500"/>
+<img src="images/is_this_a_triangle.png" alt="very funny boomer meme" width="500"/>
 
 ### 💀 Deadline
 This work should be completed before the exercise, on **Weekday 10th Month** depending on your group.
