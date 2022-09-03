@@ -2,13 +2,7 @@
 
 The following assignment is about geometry -- rectangles and triangles are objects that can be modeled with Java! You are going to practice on `if` and `else`-statements and be introduced to the *triangle inequality*.
 
-
-
-<<<<<<< HEAD
-<img src="images/is_this_a_triangle.jpeg" alt="very funny boomer meme" width="500"/>
-=======
 <img src="images/is_this_a_triangle.png" alt="very funny boomer meme" width="500"/>
->>>>>>> 0e9eef2b82131b22b4382c977b54a2f7d796c40d
 
 ### 💀 Deadline
 This work should be completed before the exercise, on **Weekday 10th Month** depending on your group.
