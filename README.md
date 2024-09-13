@@ -5,18 +5,15 @@ The following assignment is about geometry: rectangles and triangles modeled wit
 <img src="images/is_this_a_triangle.png" alt="very funny boomer meme" width="500"/>
 
 ### 💀 Deadline
-This work should be completed before the exercise on **Friday 22 September**.
+This work should be completed before the exercise on **Friday 20 September**.
 
 ### 👨🏽‍🏫 Instructions
 For instructions on how to do and submit the assignment, please see the
-[assignments section of the course instructions](https://gits-15.sys.kth.se/inda-23/course-instructions#assignments).
+[assignments section of the course instructions](https://gits-15.sys.kth.se/inda-24/course-instructions#assignments).
 
 ### 📝 Preparation
-
-- Read and answer all questions in Module 3: [Branching](https://qbl.sys.kth.se/sections/dd1337_ht23_programmering_prog/container/branching)
-- You can access the OLI material both:
-  - via Canvas (see the [OLI Torus SE](https://canvas.kth.se/courses/41415/external_tools/4247) link in the left menu)
-  - or directly at this [webpage](https://qbl.sys.kth.se/sections/dd1337_ht23_programmering_prog/container/dd1337__programming)
+- Review the [lecture slides](https://docs.google.com/presentation/d/1wRn8BkiXsHt0_anmT6TzbGHtqZ_xg4WJ8VO8ydFY4M0/edit#slide=id.p) for this week
+- Read and answer all questions in [Module 3: Branching](https://qbl.sys.kth.se/sections/dd1337_programming/container/branching)
 
 ### ✅ Learning Goals
 
@@ -26,8 +23,8 @@ For instructions on how to do and submit the assignment, please see the
 
 ### 🚨 Troubleshooting Guide
 
-1. Look at this week's [posted issues](https://gits-15.sys.kth.se/inda-23/help/issues). Are other students asking about your problem?
-2. If not, post a question yourself by creating a [New Issue](https://gits-15.sys.kth.se/inda-23/help/issues/new). Add a descriptive title, beginning with "Task *x*: *summary of problem here*"
+1. Look at this week's [posted issues](https://gits-15.sys.kth.se/inda-24/help/issues). Are other students asking about your problem?
+2. If not, post a question yourself by creating a [New Issue](https://gits-15.sys.kth.se/inda-24/help/issues/new). Add a descriptive title, beginning with "Task *x*: *summary of problem here*"
 3. Ask a TA in person during the [weekly lab](https://queue.csc.kth.se/Queue/INDA). Check your schedule to see when the next lab is.
 
 We encourage you to discuss with your course friends, but **do not share answers**!
@@ -183,7 +180,7 @@ Using this principle, improve the code you have written this week. If you have a
 > **Assistant's note:** We have added this checklist for you to make a final check before handing in your work. You don't have to tick the boxes unless you want to (to tick a box, place an "x" within the brackets when editing the README.md)
 
 ### 🐞 Bugs and errors?
-If you find any inconsistencies or errors in this exercise, please open a [New Issue](https://gits-15.sys.kth.se/inda-23/help/issues/new) with the title "Task *x* Error: *summary of error here*". Confirmed bugs will be rewarded by mentions in the acknowledgment section.
+If you find any inconsistencies or errors in this exercise, please open a [New Issue](https://gits-15.sys.kth.se/inda-24/help/issues/new) with the title "Task *x* Error: *summary of error here*". Confirmed bugs will be rewarded by mentions in the acknowledgment section.
 
 ### 🙏 Acknowledgment
 This task was designed by                <br>
