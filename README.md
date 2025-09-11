@@ -5,15 +5,15 @@ The following assignment is about geometry: rectangles and triangles modeled wit
 <img src="images/is_this_a_triangle.png" alt="very funny boomer meme" width="500"/>
 
 ### 💀 Deadline
-This work should be completed before the exercise on **Friday 20 September**.
+This work should be completed before the exercise on **Friday 19 September**.
 
 ### 👨🏽‍🏫 Instructions
 For instructions on how to do and submit the assignment, please see the
-[assignments section of the course instructions](https://gits-15.sys.kth.se/inda-24/course-instructions#assignments).
+[assignments section of the course instructions](https://gits-15.sys.kth.se/inda-25/course-instructions#assignments).
 
 ### 📝 Preparation
 - Review the [lecture slides](https://docs.google.com/presentation/d/1wRn8BkiXsHt0_anmT6TzbGHtqZ_xg4WJ8VO8ydFY4M0/edit#slide=id.p) for this week
-- Read and answer all questions in [Module 3: Branching](https://qbl.sys.kth.se/sections/dd1337_programming/container/branching)
+- Read and answer all questions in [Module 3: Branching](https://qbl.sys.kth.se/sections/dd1337_ht25_programming/container/branching)
 
 ### ✅ Learning Goals
 
@@ -23,11 +23,19 @@ For instructions on how to do and submit the assignment, please see the
 
 ### 🚨 Troubleshooting Guide
 
-1. Look at this week's [posted issues](https://gits-15.sys.kth.se/inda-24/help/issues). Are other students asking about your problem?
-2. If not, post a question yourself by creating a [New Issue](https://gits-15.sys.kth.se/inda-24/help/issues/new). Add a descriptive title, beginning with "Task *x*: *summary of problem here*"
+1. Look at this week's [posted issues](https://gits-15.sys.kth.se/inda-25/help/issues). Are other students asking about your problem?
+2. If not, post a question yourself by creating a [New Issue](https://gits-15.sys.kth.se/inda-25/help/issues/new). Add a descriptive title, beginning with "Task *x*: *summary of problem here*"
 3. Ask a TA in person during the [weekly lab](https://queue.csc.kth.se/Queue/INDA). Check your schedule to see when the next lab is.
 
 We encourage you to discuss with your course friends, but **do not share answers**!
+
+### 🗺️ Make a Plan
+
+- Check your feedback on last week's issue tracker for a review and tips!
+- Open issues for your plan in the [issue tracker](/../../issues).
+- Commit at least once per issue.
+- Reference issues from commit messages using `Fixes #N` to automatically close them.
+- Read more about it [here](https://gits-15.sys.kth.se/inda-25/course-instructions/blob/main/ice-guide.md).
 
 ### 🏛 Assignment
 
@@ -171,16 +179,14 @@ Instead of writing a function that uses if statements to return either true or f
 Using this principle, improve the code you have written this week. If you have already done this, good job! 
 
 ### ❎ Checklist
-- [ ] Create a Triangle class with a constructor that takes three sides and checks if they forma a valid triangle. 
-- [ ] Create a method to classify a triangle based on its sides. The three types are equilateral triangles, isosceles triangles, and scalene triangles. 
-- [ ] Create a method to calculate the triangle's area.
-- [ ] Create the Rectangle class by reverse engineering the RectangleExample.java file which calls its methods.
-- [ ] Improve your code by using direct return statements.
-
-> **Assistant's note:** We have added this checklist for you to make a final check before handing in your work. You don't have to tick the boxes unless you want to (to tick a box, place an "x" within the brackets when editing the README.md)
+- [ ] Cloned your repository to your local computer
+- [ ] Made a solid plan using issues
+- [ ] Completed all exercises to be best of your ability
+- [ ] Closed issues for completed exercises (with "Fixes #N" in commit messages)
+- [ ] Pushed your work to KTH GitHub!
 
 ### 🐞 Bugs and errors?
-If you find any inconsistencies or errors in this exercise, please open a [New Issue](https://gits-15.sys.kth.se/inda-24/help/issues/new) with the title "Task *x* Error: *summary of error here*". Confirmed bugs will be rewarded by mentions in the acknowledgment section.
+If you find any inconsistencies or errors in this exercise, please open a [New Issue](https://gits-15.sys.kth.se/inda-25/help/issues/new) with the title "Task *x* Error: *summary of error here*". Confirmed bugs will be rewarded by mentions in the acknowledgment section.
 
 ### 🙏 Acknowledgment
 This task was designed by                <br>
