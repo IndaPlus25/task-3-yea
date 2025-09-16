@@ -99,6 +99,8 @@ public Triangle(int a, int b, int c) {
 
 > **Assistant's Note:** There are various ways to achieve this. Under the [Wikipedia page for the Triangle Inequality](https://en.wikipedia.org/wiki/Triangle_inequality#Mathematical_expression_of_the_constraint_on_the_sides_of_a_triangle) there are some useful expressions you can use. Although it is not necessary, you may also use the [Java Math Library](https://docs.oracle.com/javase/tutorial/java/data/beyondmath.html).
 
+[Open an issue for Exercise 3.1](/../../issues/new?title=Exercise+3.1+--+The+Triangle+Inequality)
+
 #### Exercise 3.2 -- The three types of Triangles
 
 From the [Wikipedia page on Triangles](https://en.wikipedia.org/wiki/Triangle) you can read about the three types of triangles. Make a method in the `Triangle` class called `String getTriangleType()` that returns a `String` of what type the triangle is (*"Equilateral"*, *"Isosceles"* or *"Scalene"*).
@@ -108,6 +110,8 @@ Equilateral Triangle             |  Isosceles Triangle | Scalene Triangle
 ![](https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Triangle.Equilateral.svg/240px-Triangle.Equilateral.svg.png)  |  ![](https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Triangle.Isosceles.svg/156px-Triangle.Isosceles.svg.png) | ![](https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Triangle.Scalene.svg/240px-Triangle.Scalene.svg.png)
 
 > **From Wikipedia:** Hatch marks, also called tick marks, are used in diagrams of triangles and other geometric figures to identify sides of equal lengths. A side can be marked with a pattern of "ticks", short line segments in the form of tally marks; two sides have equal lengths if they are both marked with the same pattern.
+
+[Open an issue for Exercise 3.2](/../../issues/new?title=Exercise+3.2+--+The+three+types+of+Triangles)
 
 #### Exercise 3.3 -- `Triangle.getArea()`
 In this exercise, you have to calculate the area of a triangle. Mathematicians have come up with *many* formulas to achieve this, but since our triangle object has the side lengths as fields, we recommend using [Heron's Formula](https://en.wikipedia.org/wiki/Heron%27s_formula). The formula states that the area of a triangle whose sides have lengths *a*, *b*, and *c* is
@@ -144,12 +148,16 @@ An example of why one would use getters and setters to ensure encapsulation:
 
 You don't have to provide any answers, but it will be helpful to think about how to solve this with the code you already have.
 
+[Open an issue for Exercise 3.3](/../../issues/new?title=Exercise+3.3+--+Triangle.getArea())
+
 #### Exercise 3.4 -- Reverse Engineering
 Now that you have created a `Triangle` class, let's also create a `Rectangle` class along with some useful methods.
 
 For this exercise, you will not be given detailed instructions. Instead, you will need to read through the code in the [`src/RectangleExample`](src/RectangleExample.java) file. This code will attempt to create a `Rectangle` object and call three different methods on it. At the moment, it will not compile and run, since there is no `Rectangle.java` file, so start by creating this file in your [src](src) folder.
 
 You will now need to create the fields, getters, setters, and required methods in your `Rectangle` class that will allow `RectangleExample` to run and produce the correct results. Your code does not need to cover every edge case, but make sure to run the `RectangleExample` and check that your methods return the expected values. If you get stuck, don't hesitate to get help through any of the channels listed in the Troubleshooting section.
+
+[Open an issue for Exercise 3.4](/../../issues/new?title=Exercise+3.4+--+Reverse+Engineering)
 
 #### Exercise 3.5 -- Returning a boolean expression
 Instead of writing a function that uses if statements to return either true or false, sometimes you can just return a boolean expression instead. This is because the expression we are passing to the if statement is the exact value we want to return.
@@ -177,6 +185,8 @@ Instead of writing a function that uses if statements to return either true or f
 </details>
 
 Using this principle, improve the code you have written this week. If you have already done this, good job! 
+
+[Open an issue for Exercise 3.5](/../../issues/new?title=Exercise+3.5+--+Returning+a+boolean+expression)
 
 ### ❎ Checklist
 - [ ] Cloned your repository to your local computer
