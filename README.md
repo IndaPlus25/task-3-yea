@@ -57,6 +57,8 @@ public static void main(String[] args){
 ```
 </details>
 
+[Open an issue for Exercise 3.0](/../../issues/new?title=Exercise+3.0+--+A+Triangle+Object)
+
 #### Exercise 3.1 -- The Triangle Inequality
 Last week we learned about accessors and mutators but did not implement any restrictions on when you may read or write to the fields. Let's create such a restriction for the constructor method now.  
 
