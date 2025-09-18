@@ -1,6 +1,20 @@
 # This file is a mashup of different .gitignores from the
 # github.com/github/gitignore repo.
 
+# Rust build artifacts
+/target/
+
+# Compiled binaries
+*.exe
+*.out
+*.dll
+*.so
+*.dylib
+
+# Backup / temp files
+*.log
+*.tmp
+
 ### JAVA ###
 *.class
 
