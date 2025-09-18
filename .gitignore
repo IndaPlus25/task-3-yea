@@ -2,7 +2,7 @@
 # github.com/github/gitignore repo.
 
 # Rust build artifacts
-/chess-enginge/target/
+chess-engine/target/
 
 # Compiled binaries
 *.exe
