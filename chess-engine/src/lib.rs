@@ -88,6 +88,16 @@ impl Game {
     /// If the current game state is `InProgress` and the move is legal, 
     /// move a piece and return the resulting state of the game.
     pub fn make_move(&mut self, _from: &str, _to: &str) -> Option<GameState> {
+        let possible_moves = self.get_possible_moves(_from)?;
+        let from_index = Game::position_to_int(_from).expect("The first position was not input correctly");
+        let to_index = Game::position_to_int(_to).expect("The second position was not input correctly");
+
+        if possible_moves.contains(&_to.to_ascii_uppercase()) {
+            println!("From and to: {}, {}", from_index, to_index);
+            println!("The possible moves from {}: {:?}", from_index, possible_moves);
+            self.board[to_index] = self.board[from_index];
+            self.board[from_index] = 0;
+        }
         None
     }
 
@@ -106,94 +116,177 @@ impl Game {
     /// 
     /// (optional) Don't forget to include en passent and castling.
     pub fn get_possible_moves(&self, _position: &str) -> Option<Vec<String>> {
+        //Check if the position given is 2 characters long and then convert it to it's index number for the board vector
         if _position.len() != 2 {return None};
 
-        let index = Game::position_to_int(_position).unwrap();
+        let index = Game::position_to_int(_position).expect("Not a valid position on the board");
         let piece = self.board[index];
 
         let mut possible_moves: Vec<String> = Vec::new();
 
+        //println!("This is what piece % 10 is: {}", piece % 10);
+
+        //A match case to call the correct function for all the possible moves depending on what piece is on the given tile
         match piece % 10 {
                 0 => return None,
-                //1 => ,
-                2 => possible_moves = self.rook_moves(index, piece),
-                //3 => ,
-                //4 => ,
-                //5 => ,
-                //6 => ,
+                1 => possible_moves = self.pawn_moves(index, piece),
+                2 => possible_moves = self.sweeping_moves(index, piece, &[-8, 8, -1, 1]),
+                3 => possible_moves = self.singular_moves(index, piece, &[-17, 17, -15, 15, -10, 10, -6, 6]),
+                4 => possible_moves = self.sweeping_moves(index, piece, &[-9, 9, -7, 7]),
+                5 => possible_moves = self.sweeping_moves(index, piece, &[-8, 8, -1, 1, -9, 9, -7, 7]),
+                6 => possible_moves = self.singular_moves(index, piece, &[-8, 8, -1, 1, -9, 9, -7, 7]),
                 _ => return None
         }
         Some(possible_moves)
     }
 
-    fn rook_moves(&self, index: usize, piece: u8) -> Vec<String> {
+    // add function for checking if king is in danger if you move the piece
+    // if !king_is_in_danger, check if moving piece leads to king_is_in_danger, else check if piece can stop danger, otherwise return nothing
 
+    // Function to calculate which "directions" the pawn piece should be able to move, depending on if it's a black or white pawn,
+    // and check if it can move to take another piece. Afterwards it runs the singular_moves function which is also for the king and knight pieces
+    fn pawn_moves(&self, index: usize, piece: u8) -> Vec<String> {
+        
+        let mut directions: Vec<isize> = Vec::new();
+
+        if piece == 11{
+            directions.push(-8);
+            if index / 8 == 6 {
+                directions.push(-16);
+            } 
+            if index as isize - 9 >= 0 {
+                println!("This is what -9 has: {}", self.board[index - 9]);
+                if self.board[index - 9] != 0 && self.board[index - 9] < 11 {
+                    println!("-9 is added to directions");
+                    directions.push(-9);
+                }
+            }
+            if index as isize - 7 >= 0 {
+                println!("This is what -7 has: {}", self.board[index - 7]);
+                if self.board[index - 7] != 0 && self.board[index - 7] < 11 {
+                    directions.push(-7);
+                }
+            }
+        } 
+        else {
+            directions.push(8);
+            if index / 8 == 1 {
+                directions.push(16);
+            } 
+            if index + 9 <= 63 {
+                if self.board[index + 9] > 10 {
+                    directions.push(9);
+                }
+            }
+            if index + 7 <= 63 {
+                if self.board[index + 7] > 10 {
+                    directions.push(7);
+                }
+            }
+        }
+
+        self.singular_moves(index, piece, &directions)
+    }
+
+    // Function to calculate if a move would be out of bounds or not, and then send it to possble_move finally determine if it's a possible move
+    fn singular_moves(&self, index: usize, piece: u8, directions: &[isize]) -> Vec<String>{
         let mut possible_moves: Vec<String> = Vec::new();
 
-        let mut blocked_up = false;
-        let mut blocked_down = false;
-        let mut blocked_left = false;
-        let mut blocked_right = false;
+        //Loops around for every move/direction a piece could go and calls possible_move
+        for &direction in directions {
+            let target = index as isize + direction;
 
-        for n in 1..8 {
-            let target_up = index as isize - 8*n;
-            
-            if target_up >= 0 && !blocked_up{
-                let target_up = target_up as usize;
-                let tile = self.board[target_up];
+            if target >= 0 && target <= 63 {
+                let target = target as usize;
+                println!("The move is within range of the board, target is: {}, {}", target, Game::int_to_position(target));
 
-                if tile == 0 {
-                    possible_moves.push(Game::int_to_position(target_up));                               
-                } else if tile / 2 != piece / 2 {
-                    possible_moves.push(Game::int_to_position(target_up));
-                    blocked_up = true;
-                } else {
-                    blocked_up = true;
-                }
-            }
-            
-            let target_down = index + 8*n as usize;
-            if target_down <= 63 && !blocked_down {
-                let tile2 = self.board[target_down];
-
-                if tile2 == 0{
-                    possible_moves.push(Game::int_to_position(target_down));                               
-                } else if tile2 / 2 != piece / 2 {
-                    possible_moves.push(Game::int_to_position(target_down));
-                    blocked_down = true;
-                } else {
-                    blocked_down = true;
-                }
-            }
-
-            if blocked_up && blocked_down {
-                break;
+                if !((index as isize % 8  - target as isize % 8).abs() > 2) {
+                    self.possible_move(&mut possible_moves, target, piece);
+                } 
             }
         }
         possible_moves
     }
 
+    //Function to calculate if a move would be out of bounds or not, and then send it to possble_move finally determine if it's a possible move
+    fn sweeping_moves(&self, index: usize, piece: u8, directions: &[isize]) -> Vec<String> {
+        let mut possible_moves: Vec<String> = Vec::new();
+
+        //Loops around for every direction a piece could go and keeps looping until that direction gets blocked (by a chess piece or the board edge)
+        for &direction in directions {
+            for n in 1..8 {
+                let target = index as isize + direction*n;
+
+                if target < 0 || target > 63 {
+                    break;
+                }
+
+                let target = target as usize;
+
+                if (direction == -1 || direction == -9 || direction == 7) && target % 8 == 7 {
+                    break;
+                }
+                if (direction == 1 || direction == 9 || direction == -7) && target % 8 == 0 {
+                    break;
+                }
+
+                if self.possible_move(&mut possible_moves, target, piece) {
+                    break;
+                }
+            }
+        }
+
+        possible_moves
+    }
+
+    // Function to check if a move is possible and add it to the final vector of usable moves or if the target destination has an ally piece on it
+    fn possible_move(&self, possible_moves: &mut Vec<String>, target: usize, piece: u8) -> bool {
+        let tile = self.board[target];
+
+        //println!("This is checking if the move is possible, here is the target piece and using piece: {}, {}", tile / 10, (piece) / 10);
+        if tile == 0{
+            //println!("The move is possible");
+            possible_moves.push(Game::int_to_position(target));                               
+        } else if tile / 10 != piece / 10 {
+            //println!("The move is possible and takes a piece");
+            possible_moves.push(Game::int_to_position(target));
+            return true;
+        } else {
+            //println!("The move is not possible, teammate is here");
+            return true;
+        }
+        false
+    }
+
+    // Function to convert a chess position like a1 to the index number of the game chess board vector
     fn position_to_int(position: &str) -> Option<usize> {
         let mut characters = position.chars();
 
-        let rank = characters.next()?;
         let file = characters.next()?.to_ascii_lowercase();
+        let rank = characters.next()?;
 
         if !('a'..='h').contains(&file) || !('1'..='8').contains(&rank) {
             return None; 
         }
 
-        Some(file as usize * 8 + rank as usize - 1)
+        let file_index = (file as u8 - b'a') as usize;
+        let rank_index = (rank as u8 - b'1') as usize;
+
+        Some(rank_index * 8 + file_index)
     }
 
+    // Function to convert the index number of the game chess board vector to a chess position like a1
     fn int_to_position(index: usize) -> String {
 
-        let file = (b'a' + (index % 8) as u8) as char;
+        let file = (b'A' + (index % 8) as u8) as char;
         let rank = (b'1' + (index / 8) as u8) as char;
 
         format!("{}{}", file, rank)
     }
 }
+
+    
+
 
 /// Implement print routine for Game.
 /// 
@@ -217,6 +310,9 @@ impl fmt::Debug for Game {
 
         let mut piece: String = String::new();
 
+        // Loops through the game chess board vector in reverse order of ranks in order to simulate looking from the white sides perspective
+        // Every number in the vector is an id that corresponds to an empty tile or a chess piece, which gets printed out as the standard
+        // abbreviations for each chess piece and a star for empty tiles
         for rank in (0..8).rev() {
             write!(f, "{} | ", rank + 1)?;
 
@@ -250,7 +346,12 @@ impl fmt::Debug for Game {
         for i in 0..8 {
             write!(f, "{:3}", (b'A' + i as u8) as char)?;
         }
-        write!(f, "")
+        writeln!(f, "")?;
+        // ?;
+        writeln!(f, "{:?}", self.get_possible_moves("e7"))
+        // writeln!(f, "{:?}", Game::int_to_position(6))?;
+        // writeln!(f, "{:?}", Game::position_to_int("g1"))?;
+        // write!(f, "{:?}", self.board[6])
     }
 }
 
@@ -274,9 +375,15 @@ mod tests {
     #[test]
     fn game_in_progress_after_init() {
 
-        let game = Game::new();
+        let mut game = Game::new();
 
         println!("{:?}", game);
+        // game.make_move("a2", "a4");
+        // game.make_move("B7", "b5");
+        // game.make_move("B5", "A4");
+        // game.make_move("c7", "C5");
+
+        // println!("{:?}", game);
 
         assert_eq!(game.get_game_state(), GameState::InProgress);
     }
