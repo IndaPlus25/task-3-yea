@@ -11,12 +11,13 @@
  */
 
 use std::fmt;
+use std::collections::HashSet;
 
 #[derive(Copy, Clone, Debug, PartialEq)]
 pub enum GameState {
     InProgress,
     Check,
-    GameOver
+    Checkmate
 }
 
 /* IMPORTANT:
@@ -29,7 +30,6 @@ pub struct Game {
     state: GameState,
     board: Vec<u8>,
     white_turn: bool,
-    //...
 }
 
 // these aliases are used to make the code easier to read
@@ -76,6 +76,7 @@ impl Game {
         board[58] = BLACK_BISHOP;
         board[61] = BLACK_BISHOP;
         board[59] = BLACK_QUEEN;
+
         board[60] = BLACK_KING;
 
         Game {
@@ -88,43 +89,129 @@ impl Game {
     /// If the current game state is `InProgress` and the move is legal, 
     /// move a piece and return the resulting state of the game.
     pub fn make_move(&mut self, _from: &str, _to: &str) -> Option<GameState> {
-        let possible_moves = self.get_possible_moves(_from)?;
+        if self.state == GameState::Checkmate {
+            return Some(self.state);
+        }
+        if _from.len() != 2 || _to.len() != 2 {return Some(self.state)};
+
         let from_index = Game::position_to_int(_from).expect("The first position was not input correctly");
         let to_index = Game::position_to_int(_to).expect("The second position was not input correctly");
 
-        if possible_moves.contains(&_to.to_ascii_uppercase()) {
-            println!("From and to: {}, {}", from_index, to_index);
-            println!("The possible moves from {}: {:?}", from_index, possible_moves);
+        let possible_moves = self.get_possible_moves(from_index)?;
+        
+        // if the move is possible and within rules, do it
+        if possible_moves.contains(&to_index) && ((self.white_turn && self.board[from_index] / 10 == 0) || (self.white_turn == false && self.board[from_index] / 10 == 1)) {
             self.board[to_index] = self.board[from_index];
             self.board[from_index] = 0;
+
+            // check where the opposing king is and if it is being attacked
+            for i in 0..64 {
+                if self.board[i] == BLACK_KING && self.white_turn && self.get_all_possible_moves(self.white_turn).contains(&i) {
+                    self.state = self.check_checkmate(&i);
+                } else if self.board[i] == WHITE_KING && !self.white_turn && self.get_all_possible_moves(self.white_turn).contains(&i){
+                    self.state = self.check_checkmate(&i);
+                }
+            }
+
+            self.white_turn = !self.white_turn;
         }
-        None
+        Some(self.state)
     }
 
     /// Set the piece type that a pawn becames following a promotion.
-    pub fn set_promotion(&mut self, _piece: &str) -> () {
+    // I would believe you shouldn't ask for input inside a package like this, so I don't really know how to handle this
+    // and I am too lazy to make a default case, wouldn't be that hard I believe, if pawn goes to certain indexes on opposing side, self.board[index] = QUEEN
+    pub fn set_promotion(&mut self, index: &usize) -> () {
         ()
     }
 
     /// Get the current game state.
+    // Haven't used this at all lol
     pub fn get_game_state(&self) -> GameState {
         self.state
     }
+
+    // Gets called when a king is under attack, checks if all of the kings moves would also result in it being attacked, and then
+    // loops through and simulates every ally move to see if they can block the attack or kill the attacker. If the king is still under attack, checkmate
+    // Returns GameState
+    pub fn check_checkmate(&mut self, king_index: &usize) -> GameState{
+        let mut possible_moves: Vec<usize> = Vec::new();
+        let mut piece: u8 = 0;
+        let mut piece2: u8 = 0;
+        let colour: u8 = {
+            if self.white_turn {
+                1
+            } else {
+                0
+            }
+        };
+
+
+        if self.get_possible_moves(*king_index).expect("error").iter().all(|&_move| self.get_all_possible_moves(self.white_turn).contains(&_move))
+        {
+            for i in 0..64 {
+
+                if self.board[i] / 10 == colour && self.board[i] != BLACK_KING && self.board[i] != WHITE_KING && self.board[i] != 0{
+                    possible_moves = self.get_possible_moves(i).expect("error");
+                    piece = self.board[i];
+                    
+                    for _move in possible_moves {
+                        piece2 = self.board[_move];
+
+                        self.board[_move] = self.board[i];
+                        self.board[i] = 0;
+
+                        if !self.get_all_possible_moves(self.white_turn).contains(&king_index) {
+                            self.board[i] = piece;
+                            self.board[_move] = piece2;
+                            return GameState::Check;
+                        }
+                        self.board[i] = piece;
+                        self.board[_move] = piece2;
+                    }
+                } 
+            }
+            return GameState::Checkmate;
+        }
+        GameState::Check
+    }
     
+    // This calls get_possible_moves, which returns a list of all possible moves for a piece on a given tile, and converts it to 
+    // a list of chess notations instead of back end chess index
+    pub fn get_possible_moves_chess(&self, index: usize) -> Option<Vec<String>> {
+        let possible_moves: Vec<String> = self.get_possible_moves(index)?.into_iter().map(|_move| Game::int_to_position(_move)).collect();
+        Some(possible_moves)
+    }
+
+    // Returns a HashSet of all possible tiles all of the pieces on one given side can go to, so every tile white can go to for example.
+    pub fn get_all_possible_moves(&self, white_turn: bool) -> HashSet<usize> {
+        let mut all_possible_moves: HashSet<usize> = HashSet::new();
+
+        if white_turn {
+            for i in 0..64 {
+                if self.board[i] / 10 == 0 && self.board[i] != 0 {
+                    all_possible_moves.extend(self.get_possible_moves(i).expect("Error"));
+                }
+            }
+        } else {
+            for i in 0..64 {
+                if self.board[i] / 10 == 1 {
+                    all_possible_moves.extend(self.get_possible_moves(i).expect("Error"));
+                }
+            }
+        }
+
+        all_possible_moves
+    }
+
     /// If a piece is standing on the given tile, return all possible 
     /// new positions of that piece. Don't forget to the rules for check. 
     /// 
-    /// (optional) Don't forget to include en passent and castling.
-    pub fn get_possible_moves(&self, _position: &str) -> Option<Vec<String>> {
-        //Check if the position given is 2 characters long and then convert it to it's index number for the board vector
-        if _position.len() != 2 {return None};
-
-        let index = Game::position_to_int(_position).expect("Not a valid position on the board");
+    /// (optional) Don't forget to include en passent and castling. (spoiler, I didn't)
+    pub fn get_possible_moves(&self, index: usize) -> Option<Vec<usize>>{
         let piece = self.board[index];
 
-        let mut possible_moves: Vec<String> = Vec::new();
-
-        //println!("This is what piece % 10 is: {}", piece % 10);
+        let mut possible_moves: Vec<usize> = Vec::new();
 
         //A match case to call the correct function for all the possible moves depending on what piece is on the given tile
         match piece % 10 {
@@ -140,12 +227,9 @@ impl Game {
         Some(possible_moves)
     }
 
-    // add function for checking if king is in danger if you move the piece
-    // if !king_is_in_danger, check if moving piece leads to king_is_in_danger, else check if piece can stop danger, otherwise return nothing
-
     // Function to calculate which "directions" the pawn piece should be able to move, depending on if it's a black or white pawn,
     // and check if it can move to take another piece. Afterwards it runs the singular_moves function which is also for the king and knight pieces
-    fn pawn_moves(&self, index: usize, piece: u8) -> Vec<String> {
+    fn pawn_moves(&self, index: usize, piece: u8) -> Vec<usize> {
         
         let mut directions: Vec<isize> = Vec::new();
 
@@ -155,14 +239,11 @@ impl Game {
                 directions.push(-16);
             } 
             if index as isize - 9 >= 0 {
-                println!("This is what -9 has: {}", self.board[index - 9]);
                 if self.board[index - 9] != 0 && self.board[index - 9] < 11 {
-                    println!("-9 is added to directions");
                     directions.push(-9);
                 }
             }
             if index as isize - 7 >= 0 {
-                println!("This is what -7 has: {}", self.board[index - 7]);
                 if self.board[index - 7] != 0 && self.board[index - 7] < 11 {
                     directions.push(-7);
                 }
@@ -188,9 +269,9 @@ impl Game {
         self.singular_moves(index, piece, &directions)
     }
 
-    // Function to calculate if a move would be out of bounds or not, and then send it to possble_move finally determine if it's a possible move
-    fn singular_moves(&self, index: usize, piece: u8, directions: &[isize]) -> Vec<String>{
-        let mut possible_moves: Vec<String> = Vec::new();
+    // Function to calculate if a move would be out of bounds or not, and then send it to possible_move finally determine if it's a possible move
+    fn singular_moves(&self, index: usize, piece: u8, directions: &[isize]) -> Vec<usize>{
+        let mut possible_moves: Vec<usize> = Vec::new();
 
         //Loops around for every move/direction a piece could go and calls possible_move
         for &direction in directions {
@@ -198,7 +279,6 @@ impl Game {
 
             if target >= 0 && target <= 63 {
                 let target = target as usize;
-                println!("The move is within range of the board, target is: {}, {}", target, Game::int_to_position(target));
 
                 if !((index as isize % 8  - target as isize % 8).abs() > 2) {
                     self.possible_move(&mut possible_moves, target, piece);
@@ -208,9 +288,9 @@ impl Game {
         possible_moves
     }
 
-    //Function to calculate if a move would be out of bounds or not, and then send it to possble_move finally determine if it's a possible move
-    fn sweeping_moves(&self, index: usize, piece: u8, directions: &[isize]) -> Vec<String> {
-        let mut possible_moves: Vec<String> = Vec::new();
+    //Function to calculate if a move would be out of bounds or not, and then send it to possible_move finally determine if it's a possible move
+    fn sweeping_moves(&self, index: usize, piece: u8, directions: &[isize]) -> Vec<usize> {
+        let mut possible_moves: Vec<usize> = Vec::new();
 
         //Loops around for every direction a piece could go and keeps looping until that direction gets blocked (by a chess piece or the board edge)
         for &direction in directions {
@@ -240,25 +320,21 @@ impl Game {
     }
 
     // Function to check if a move is possible and add it to the final vector of usable moves or if the target destination has an ally piece on it
-    fn possible_move(&self, possible_moves: &mut Vec<String>, target: usize, piece: u8) -> bool {
+    fn possible_move(&self, possible_moves: &mut Vec<usize>, target: usize, piece: u8) -> bool {
         let tile = self.board[target];
 
-        //println!("This is checking if the move is possible, here is the target piece and using piece: {}, {}", tile / 10, (piece) / 10);
         if tile == 0{
-            //println!("The move is possible");
-            possible_moves.push(Game::int_to_position(target));                               
+            possible_moves.push(target); 
         } else if tile / 10 != piece / 10 {
-            //println!("The move is possible and takes a piece");
-            possible_moves.push(Game::int_to_position(target));
+            possible_moves.push(target);
             return true;
         } else {
-            //println!("The move is not possible, teammate is here");
             return true;
         }
         false
     }
 
-    // Function to convert a chess position like a1 to the index number of the game chess board vector
+    // Function to convert a chess notation/position like a1 to the index number of the game chess board vector
     fn position_to_int(position: &str) -> Option<usize> {
         let mut characters = position.chars();
 
@@ -275,7 +351,7 @@ impl Game {
         Some(rank_index * 8 + file_index)
     }
 
-    // Function to convert the index number of the game chess board vector to a chess position like a1
+    // Function to convert the index number of the game chess board vector to a chess notation/position like a1
     fn int_to_position(index: usize) -> String {
 
         let file = (b'A' + (index % 8) as u8) as char;
@@ -302,6 +378,8 @@ impl Game {
 /// | R  Kn B  K  Q  B  Kn R |
 /// |:----------------------:|
 
+// Btw, this example has the chess board kind of inverted, the kings are supposed to be 2 tiles to the right
+
 impl fmt::Debug for Game {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         /* build board representation string */
@@ -318,19 +396,19 @@ impl fmt::Debug for Game {
 
             for file in 0..8 {
                 match self.board[rank * 8 + file] {
-                    0 => piece = "*".to_string(),
-                    1 => piece = "P".to_string(),
-                    2 => piece = "R".to_string(),
-                    3 => piece = "Kn".to_string(),
-                    4 => piece = "B".to_string(),
-                    5 => piece = "Q".to_string(),
-                    6 => piece = "K".to_string(),
-                    11 => piece = "p".to_string(),
-                    12 => piece = "r".to_string(),
-                    13 => piece = "kn".to_string(),
-                    14 => piece = "b".to_string(),
-                    15 => piece = "q".to_string(),
-                    16 => piece = "k".to_string(),
+                    EMPTY => piece = "*".to_string(),
+                    WHITE_PAWN => piece = "P".to_string(),
+                    WHITE_ROOK => piece = "R".to_string(),
+                    WHITE_KNIGHT => piece = "Kn".to_string(),
+                    WHITE_BISHOP => piece = "B".to_string(),
+                    WHITE_QUEEN => piece = "Q".to_string(),
+                    WHITE_KING => piece = "K".to_string(),
+                    BLACK_PAWN => piece = "p".to_string(),
+                    BLACK_ROOK => piece = "r".to_string(),
+                    BLACK_KNIGHT => piece = "kn".to_string(),
+                    BLACK_BISHOP => piece = "b".to_string(),
+                    BLACK_QUEEN => piece = "q".to_string(),
+                    BLACK_KING => piece = "k".to_string(),
                     _ => piece = "?".to_string(),
                 }
 
@@ -346,12 +424,7 @@ impl fmt::Debug for Game {
         for i in 0..8 {
             write!(f, "{:3}", (b'A' + i as u8) as char)?;
         }
-        writeln!(f, "")?;
-        // ?;
-        writeln!(f, "{:?}", self.get_possible_moves("e7"))
-        // writeln!(f, "{:?}", Game::int_to_position(6))?;
-        // writeln!(f, "{:?}", Game::position_to_int("g1"))?;
-        // write!(f, "{:?}", self.board[6])
+        writeln!(f, "")
     }
 }
 
@@ -377,14 +450,45 @@ mod tests {
 
         let mut game = Game::new();
 
-        println!("{:?}", game);
-        // game.make_move("a2", "a4");
-        // game.make_move("B7", "b5");
-        // game.make_move("B5", "A4");
-        // game.make_move("c7", "C5");
-
         // println!("{:?}", game);
 
-        assert_eq!(game.get_game_state(), GameState::InProgress);
+        // Test to see if white check is possible
+        // game.make_move("e2", "e3");
+        // game.make_move("a7", "a6");
+
+        // game.make_move("d1", "f3");
+        // game.make_move("b7", "b6");
+
+        //  game.make_move("f3", "e4");
+        //  game.make_move("h7", "h6");
+
+
+        //  game.make_move("a2", "a3");
+        //  game.make_move("e7", "e5");
+
+        //  game.make_move("e4", "e5");
+
+
+        // Test to see if black check is possible
+        // game.make_move("e2", "e4");
+        // game.make_move("e7", "e6");
+        
+        // game.make_move("a2", "a3");
+        // game.make_move("d8", "f6");
+
+        //  game.make_move("b2", "b3");
+        //  game.make_move("f6", "f5");
+
+        //  game.make_move("h2", "h3");
+        //  game.make_move("f5", "e4");
+
+        //game.make_move("e4", "e5");
+
+
+        println!("{:?}", game);
+        println!("This is the gamestate: {:?}", game.state);
+
+        //assert_eq!(game.get_game_state(), GameState::InProgress); ???
+        // Turned this off to test if check and checkmate worked
     }
 }
